@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="/semantic/semantic.min.js"></script> 
+  <script src="/semantic/semantic.js"></script> 
+
+  <title></title>
+
+	<link href="/semantic/semantic.min.css" rel="stylesheet">
+	<link href="/semantic/semantic.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/my_classes.css">
+  <link rel="stylesheet" type="text/css" href="/css/profile.css">
+  <link rel="stylesheet" type="text/css" href="/css/home.css">
+
+  <script>
+    $( document ).ready(function() {
+        $('.menu .item').tab();
+    });
+    $( document ).ready(function() {
+          $('#profile_dropdown').dropdown({action: 'combo'});
+      $('.ui.accordion').accordion();
+      });
+  </script>
+
+</head>
+
+<body>
+  <% include ../partials/menu-bar.ejs %>
+  <div class = "gray_background" style = "padding-top: 20px;">
+    <div><br></div>
+    <div class="ui grid container">
+      <div class="row">
+        <div class="one wide column"></div>
+        <div class="four wide column">
+          <div class = "ui segment vertical menu" id = "sidebar">
+            <a class = "item active" href="my_classes" >
+              My Classes
+            </a>
+            <a class = "item" href="my_teachings">
+              My Teachings
+            </a>
+            <a class= "item" href="profile">
+              My Profile
+            </a>
+          </div>    
+        </div> 
+        <div class="ten wide column">
+          <div class = "ui container">
+            <div class="ui top attached tabular menu" id = "upcoming_classes">
+              <div class="active item" data-tab = "upcoming_classes">Upcoming Classes</div>
+              <div class="item" data-tab = "past_classes">Past Classes</div>
+            </div>
+            <div class="ui bottom attached active tab segment" data-tab = "upcoming_classes">
+                <div id="learningTab"></div>
+            </div>
+            <div class="ui bottom attached tab segment" data-tab = "past_classes">      
+                <div id="pastClassesTab"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script type="text/x-handlebars-template" id="profile-template">  
+    <div class="ui two column grid">
+      <div class="column">
+        <img class = "ui circular image" id = "profile_pic" src="{{ profile.image }}">
+      </div>
+      <div class = "column">
+        <h1>{{ profile.name.first }} {{ profile.name.last }}</h1>
+        <p><b>Email:&nbsp;&nbsp;</b>{{ profile.email }}</p>
+        <p><b>Phone Number:&nbsp;&nbsp;</b>{{ profile.phoneNumber }}</p>
+        <p><b>About Me:&nbsp;&nbsp;</b>{{ profile.description }}</p>
+      </div>
+    </div>
+  </script>
+  
+  <script type="text/x-handlebars-template" id="profileinfo-template">
+    <div class="four wide column">
+      <div class="ui card">
+        <div class="image">
+          <img src="{{ profile.image }}">
+        </div>
+        <div class="content">
+          <a class="header">{{ profile.name.first }} {{ profile.name.last }}</a>
+          <div class="meta">
+              <span class="date">Email: {{ profile.email }}</span>
+          </div>
+          <div class="description">
+              {{ profile.description }}
+          </div>
+        </div>
+        <div class="extra content">
+          <a>
+              <i class="user icon"></i>
+              {{ profile.connections }} Connections
+          </a>
+        </div>
+      </div>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars-template" id="upcomingclasses-template">
+    {{#if hasMessage }}
+      <h3 class="ui block header">{{ message }}</h3>
+    {{/if}}
+    {{#unless error }}
+    {{#with classes.length }}
+      {{#if ../classes}}
+        <div class="ui stackable cards">
+        {{#each ../classes}}
+          {{> profileClassesCard this }}
+        {{else}}
+          <h4 class = "no_experience"> You have no upcoming classes.</h4>
+            <a href = "/learn" class="ui centered orange big button">
+              Find a Class 
+            </a>     
+        {{/each}}
+      </div>
+      {{else}}
+        <h4 class = "no_experience"> You have no upcoming classes.</h4>
+        <a href = "/learn" class="ui centered orange big button">Find a Class</a>
+      {{/if}}   
+    {{/with}}
+    {{/unless}}
+  </script>
+
+
+  <script type="text/x-handlebars-template" id="upcomingteachings-template">
+    {{#if hasMessage }}
+      <h3 class="ui block header">{{ message }}</h3>
+    {{/if}}
+    {{#unless error }}
+    {{#with classes.length }}
+      {{#if ../classes}}
+        <div class="ui stackable cards">
+        {{#each ../classes}}
+          {{> profileClassesCard this }}
+        {{else}}
+          <h4 class = "no_experience"> You have no upcoming classes to teach. Get to the <a href="/teach">teach page</a> to create a class.</h4>    
+        {{/each}}
+      </div>
+      {{else}}
+        <h4 class = "no_experience"> You have no upcoming classes to teach. Get to the <a href="/teach">teach page</a> to create a class.</h4>    
+      {{/if}}   
+    {{/with}}
+    {{/unless}}
+  </script>
+
+  <script type="text/x-handlebars-template" id="pastclasses-template">
+    {{#if hasMessage }}
+      <h3 class="ui block header">{{ message }}</h3>
+    {{/if}}
+    {{#unless error }}
+    {{#with classes.length }}
+      {{#if ../classes}}
+        <div class="ui stackable cards">
+        {{#each ../classes}}
+          {{> reviewClassesCard this }}
+        {{else}}
+          <h4 class = "no_experience"> Oh no! You have not taken any classes yet!</h4>
+          <a href = "/learn" class="ui centered orange big button">Find a Class</a>  
+        {{/each}}
+      </div>
+      {{else}}
+        <h4 class = "no_experience"> Oh no! You have not taken any classes yet!</h4>
+        <a href = "/learn" class="ui centered orange big button">Find a Class</a>  
+      {{/if}}   
+    {{/with}}
+    {{/unless}}
+  </script>
+
+  <script type="text/x-handlebars-template" id="pastteachings-template">
+    {{#if hasMessage }}
+      <h3 class="ui block header">{{ message }}</h3>
+    {{/if}}
+    {{#unless error }}
+    {{#with classes.length }}
+      {{#if ../classes}}
+        <div class="ui stackable cards">
+        {{#each ../classes}}
+          {{> reviewClassesCard this }}
+        {{else}}
+          <h4 class="ui block header">You do not have any past classes. If you are a newcomer, head over to the <a href="/teach">teach page</a> to create a class!</h4> 
+        {{/each}}
+      </div>
+      {{else}}
+        <h4 class="ui block header">You do not have any past classes. If you are a newcomer, head over to the <a href="/teach">teach page</a> to create a class!</h4>
+      {{/if}}   
+    {{/with}}
+    {{/unless}}
+  </script>
+
+  <script>
+    var user = <%- JSON.stringify(user) %>
+    console.log(user);
+  </script>
+
+
+  <!-- <script src="/js/lib/handlebars.js"></script> -->
+  <script src="/js/handlebars-v4.0.5.js"></script>
+
+  <!-- Helpers -->
+  <script src="/js/handlebars-helpers.js"></script>
+
+  <!-- Models --> 
+  <script type="text/javascript" src="js/user-model.js"></script>
+  <script type="text/javascript" src="js/class-model.js"></script>
+
+  <!-- Views --> 
+  <script type="text/javascript" src="js/my_classes-view.js"></script>
+</body>
+
+</html>

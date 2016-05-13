@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+	<title></title>
+
+	<script src="/rating/dist/components/rating.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/rating/dist/components/rating.min.css"/>
+	<link href="semantic/semantic.min.css" rel="stylesheet">
+	<link href="semantic/semantic.css" rel="stylesheet">
+	<link href="/css/profile.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/css/home.css">
+	<script src="/rating/dist/components/rating.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/rating/dist/components/rating.min.css"/>
+
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script src="semantic/semantic.min.js"></script> 
+	<script src="semantic/semantic.js"></script> 
+
+	<script type="application/javascript">
+	    $(document)
+	      .ready(function() {
+		 	$('.help.circle.icon').popup({on: 'click'});
+		 	$('.dropdown').dropdown({action: 'activate'});
+		 	$('.ui.rating').rating();
+		 });
+	</script>
+
+	<style>
+      
+      #map {
+        height: 350px;
+        width: 420px;
+      }
+      
+    </style>
+
+</head>
+
+<body>
+
+	<% include ../partials/menu-bar.ejs %>
+
+	<!--<div class="class_des_wrapper">
+		<button class="ui button class_des_close_button" onClick="javascript:history.back(1)">X</button>
+		<div class="class_des" id="class_container">-->
+			<div class="ui grid class_des_teacher_info" style="padding-top: 60px;">
+				<div class="one wide column"></div>
+  				<div class="four wide column">
+  					<div class="ui fluid card">
+					  <div class="content">
+					    <div class="header" style="font-size: 15px;">Select a date and time</div>
+					  </div>
+					  <div class="content">
+					    <select class="ui dropdown" id="class_time_dropdown" style="width:100%;">
+					      <% for (var i = 0; i < classdata.sessions.length; i++) { %>
+					      	<% var session = classdata.sessions[i] %>
+						  	<option value=<%= i %>><%= session.date %>&nbsp;<%= session.startTime%> - <%= session.endTime %></option>
+						  <% } %>
+						</select>
+					  </div>
+					  <div class="extra content">
+					    <button class="ui yellow button" style="width: 100%;" onclick = "class_confirm()">Sign up</button>
+					  </div>
+					</div>
+  					<div class="ui fluid card">
+  						<% var userprofileurl = "/userprofile?id=" + classdata.teacher %>
+  						<div class="image">
+          					<a href=<%= userprofileurl %> ><img class="ui image" src="<%= classdata.teacherData.image %>" style="width: 100%;"></a>
+        				</div>
+  						<div class="content">
+  							<p class="header class_des_instructor_title">Instructor Info</p>
+    						<a href=<%= userprofileurl %> ><%= classdata.teacherData.name.first %> <%= classdata.teacherData.name.last %></a>
+    						<div class="meta">
+      							<span class="date">Email: <%= classdata.teacherData.email %> </span>
+   							</div>
+    						<div class="description">
+    							<% if (classdata.teacherData.description && classdata.teacherData.description.length > 0) { %>
+      								<span class="bio">Bio: <%= classdata.teacherData.description %></span>
+    							<% } %>
+      							<% console.log(classdata.teacherData) %>
+    						</div>
+  						</div>
+  						<div class="extra content">
+    						<a>
+      							<i class="user icon"></i>
+      							<%= classdata.teacherData.connections %> Connections
+    						</a>
+  						</div>
+					</div>
+  				</div>
+  				<div class="nine wide column">
+  					<div class="ui fluid card">
+					  <div class="content">
+					    <div class="header class_des_title"> <%= classdata.name %> <span> &nbsp;&nbsp;&nbsp;</span>
+					    	<% if (classdata.group == true) { %>
+					    		<span class="ui tag label class_setting_tag">Group</span> 
+					    	<% } else { %> 
+					    		<span class="ui tag label class_setting_tag">1 on 1</span> 
+					    	<% } %>
+					    </div>
+					  </div>
+					  <div class="content">
+						  <div class="card">
+						    <div class="image">
+						      <img src= <%= classdata.photos[0] %> style="width: 500px;">
+						    </div>
+						  </div>
+					  </div>
+					  <div class="content">
+					    <h4 class="ui sub header">Class Description</h4>
+					    <div class="ui small feed">
+					      <%= classdata.blurb %> 
+					    </div>
+					    <h4 class="ui sub header">Address: <span id="address"><%= classdata.location %></span></h4>
+					  </div>
+					  <div id="map" style="margin-left: 13px;"></div>
+					  <!--<iframe width="420" height="320" frameborder="0" style="border:0; padding-left: 20px; padding-bottom: 10px;" src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJdX42cNu6j4AR8cteudGn_nA&key=AIzaSyBWrRwS96iCRzzRUw5gtzjXvvgj4MMBeQ0" allowfullscreen></iframe>-->
+
+					  <div class="content">
+					  	<h4 class="ui sub header">Reviews</h4>
+					  	<% if(classdata.reviews.length == 0) { %>
+					  		<div class="ui small feed"> No reviews yet. Be the first to write a <a href="/review?id=<%= classdata._id %>">review</a>!</div>
+					  	<% } %>
+					  	<% classdata.reviews.forEach(function(review) { %>
+					  		<% console.log(review) %>
+						  	<div class="ui fluid card">
+							    <div class="content">
+							      <img class="right floated ui mini circular image" src="<%= review.userImage %>">
+							      <div class="header">
+							        <%= review.userName %>
+							        <div class="ui small star rating" data-rating="4"></div>
+							      </div>
+
+							      <div class="meta">
+							        Date: <%= review.datePosted %>
+							      </div>
+							      <div class="description">
+							        <%= review.message %>
+							      </div>
+							    </div>
+						  	</div>
+					  	<% }); %>
+						</div>
+  					</div>
+  					<div class="two wide column"></div>
+				</div>
+			</div>
+	<% include ../partials/footer.ejs %> 
+
+	<div id = "confirm_box">
+        <br>
+        <div><h3 class = "box_title" >Confirmed!</h3></div>
+        <br>
+        <p id ="confirm_note">You're confirmed for <%= classdata.name %>. Your neighbor is so excited to share their culture with you. You can view the classes you've signed up for in your profile.</p>
+        <br>
+        <a href = "learn">
+        <button id = "confirm_button" onclick = "close_confirm()" class = "confirm_button ui button" style="margin-bottom: 10px;">Return</button></a>
+        <br>
+     </div>
+
+     <script>
+     	var user = null;
+     	<% if(user) { %>
+     		user = <%- JSON.stringify(user) %>;
+     	<% } %>
+     	var classs = <%- JSON.stringify(classdata) %>;
+     </script>
+
+<script src="/js/handlebars-v4.0.5.js"></script>
+
+<script src="/js/class-model.js"></script>
+    <!-- Helpers -->
+<script src="/js/handlebars-helpers.js"></script>
+
+<script src="/js/class_description-view.js"></script> 
+
+<script>
+  function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 12,
+      center: {lat: -34.397, lng: 150.644}
+    });
+    var geocoder = new google.maps.Geocoder();
+
+    // document.getElementById('submit').addEventListener('click', function() {
+    //   geocodeAddress(geocoder, map);
+    // });
+   geocodeAddress(geocoder, map);
+  }
+
+  function geocodeAddress(geocoder, map) {
+    var address = document.getElementById('address').innerHTML;
+    //var address = '750 Escondido Road, Stanford, CA 94305';
+    geocoder.geocode({'address': address}, function(results, status) {
+      if (status === google.maps.GeocoderStatus.OK) {
+        map.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+        });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+  }
+</script>
+
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWrRwS96iCRzzRUw5gtzjXvvgj4MMBeQ0&signed_in=true&callback=initMap">
+    </script>
+
+</body>
+
+</html>

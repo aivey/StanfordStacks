@@ -1,0 +1,106 @@
+#class_des_wrapper {
+	position: fixed;
+	display: none;
+	top: 12%;
+	left: 2.5%;
+	background-color: rgba(242, 113, 28, 0.5);
+	width: 95%;
+	height: 85%;
+}
+
+.class_des {
+	position: relative;
+	top: 5%;
+	left: 7.5%;
+	background-color: white;
+	width: 85%;
+	height: 90%;
+	opacity: 1;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+.class_des_teacher_info {
+	position: relative;
+	top: 5%;
+	left: 2.5%;
+}
+
+.class_des_instructor_title {
+	text-decoration: underline;
+}
+
+.class_des_close_button {
+	position: relative;
+	top: 2%;
+	right: 2%;
+	float:right;
+}
+
+.class_reviewable {
+	position:relative;
+    display:inline-block;
+    text-align:center;
+}
+
+.review_button {
+	position:absolute;
+    top:10px;
+    left:15px;
+}
+
+.learnteach {
+	float: right;
+}
+
+.user_account {
+	float: right;
+
+}
+
+#class-entry-container {
+  background-color: #F5F5F5;
+  text-align: center;
+  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+}
+
+#learn-header {
+  padding-top: 60px;
+  text-align: center;
+  font-size: 35px;
+  font-weight: bold;
+  color: white;
+  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+  background-color: #F2711C;
+}
+
+#learn-subheader {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  font-size: 18px;
+  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+  color: white;
+  background-color: #F2711C;
+}
+
+#confirm_box {
+	text-align: center;
+	display: none;
+	border: solid 3px red;
+	background-color: white;
+	z-index: 2;
+	position: fixed;
+	top: 25%;
+	width: 60%;
+	margin-left: 18%;
+	border-radius: 5px;
+}
+#scrollup {
+    width: 120px;
+    height: 50px;
+    position: fixed;
+    bottom: 320px;
+    right: 15px;
+  	display: none;
+}

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+	<head>
+		<link rel="stylesheet" type="text/css" href="/css/login.css"/>
+     <link rel="stylesheet" type="text/css" href="/semantic/components/button.css"/>
+     <link rel="stylesheet" type="text/css" href="/semantic/semantic.css"/>
+     <link rel="stylesheet" type="text/css" href="/semantic/semantic.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/semantic/components/button.min.css"/>
+		
+	</head>
+
+	<body>
+    <div class="model_wrapper">
+      <div class="ui card">
+        
+        <div class="content">
+          <form class="ui form" action="/login" method="post">
+            <div class="field">
+              <input type="text" name="email" placeholder="Email">
+            </div>
+            <div class="field">
+  
+              <input type="password" name="password" placeholder="Password">
+            </div>
+            <button class="ui orange button" type="submit" style="width: 100%;">Log in</button>
+          </form>
+        </div>
+        <div class="extra content">
+          <text>Don't have an account? </text>
+          <a class="ui tiny button" style="float: right;" href="/signup">Sign up</a>
+        </div>
+      </div>
+    </div>
+
+    
+    <script src="/js/login-view.js"></script>
+	</body>
+
+</html>
