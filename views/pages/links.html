@@ -79,9 +79,9 @@
 	<div class="ui five column grid" style="margin: 30px 30px;">
 		<% links.forEach(function(link) { %>
 			<div class="column">
-	    		<div class="ui fluid card" href="<%=category.url%>">
+	    		<div class="ui fluid card" href="<%=link.url%>" target="_blank">
 	      			<div class="content">
-	       				<a class="header" href="<%=link.url%>"><%=link.title%></a>
+	       				<a class="header" href="<%=link.url%>" target="_blank"><%=link.title%></a>
 	       				<div class="description">
 				          	<p><%=link.description%></p>
 				        </div>
