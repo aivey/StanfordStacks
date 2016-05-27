@@ -1,10 +1,29 @@
 var User = require('../models/user');
 var Link = require('../models/link');
 var Category = require('../models/category');
+var Site = require('../models/site');
 
 module.exports = function(app, passport, db) {
 	app.get('/', function(request, response) {
-	  response.render('pages/home.html', { 'user': request.user });
+		var siteVisit = new Site({
+		  	type: "Home Page Visit"
+		});
+	  siteVisit.save(function(error, visit) {
+	  	if(error) {
+	  		console.log("sad days");
+	  	}
+	  });
+
+	  Category.find(function(error, categories) {
+			if(error) {
+				throw error;
+			} else {
+				var data = categories;
+				console.log(data);
+				response.render('pages/home.html', { 'user': request.user, 'categories': data });
+			}
+		});
+
 	  //response.render('pages/login.html');
 	});
 
@@ -19,6 +38,15 @@ module.exports = function(app, passport, db) {
 		// 		{ name: 'Transportation', image: 'matthew.png', url: 'category?type=transportation'}
 		// 	]
 		// });
+		var siteVisit = new Site({
+		  	type: "Home Page Visit"
+		});
+	  siteVisit.save(function(error, visit) {
+	  	if(error) {
+	  		console.log("sad days");
+	  	}
+	  });
+
 		Category.find(function(error, categories) {
 			if(error) {
 				throw error;
@@ -31,6 +59,15 @@ module.exports = function(app, passport, db) {
 	});
 
 	app.get('/category', function(request, response) {
+		var siteVisit = new Site({
+		  	type: "Category Visit"
+		});
+	  siteVisit.save(function(error, visit) {
+	  	if(error) {
+	  		console.log("sad days");
+	  	}
+	  });
+
 		Link.find( { 'category' : request.query.type }, function(error, links) {
 			if(error) {
 				throw error;
@@ -86,6 +123,14 @@ module.exports = function(app, passport, db) {
 
 	app.post('/addLink', function(request, response) {
 		console.log(request);
+		var siteVisit = new Site({
+		  	type: "Link Added"
+		});
+	  siteVisit.save(function(error, visit) {
+	  	if(error) {
+	  		console.log("sad days");
+	  	}
+	  });
 		if(request.body.url && request.body.title && request.body.description) {
 			var link = new Link({
 				url: request.body.url,
@@ -98,7 +143,7 @@ module.exports = function(app, passport, db) {
 				if(error) {
 					throw error;
 				} else {
-					response.json(200, link);
+					response.redirect(request.get('referer'));
 				}
 			});
 		}
