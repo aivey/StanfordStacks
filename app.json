@@ -1,7 +1,7 @@
 {
-  "name": "urbanspire",
+  "name": "stanfordstack",
   "description": "A Node.js app that works to bring together communties through cultural classes",
-  "repository": "https://git.heroku.com/urbanspire.git",
+  "repository": "https://github.com/aivey/StanfordStacks.git",
   "logo": "http://node-js-sample.herokuapp.com/node.svg",
   "keywords": ["node", "express", "static"],
   "image": "heroku/nodejs"

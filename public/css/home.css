@@ -1,6 +1,20 @@
 body {
 	font-family: "Georgia";
 }
+#menu___bar {
+	background-color: #8C1515;
+	color: white;
+}
+.stanfordcoolgray {
+	background-color: #4D4F53;
+}
+.stanfordtan {
+	background-color: #D2C295;
+}
+
+.ui.secondary.pointing.menu .item {
+	color: #DAD7CB;
+}
 h3.ui.header.subtitles {
 	text-align: center;
 	font-size: 30px;
@@ -10,7 +24,7 @@ h4.ui.header.underline {
 	text-align: center;
 	margin-top: 5px;
 	margin-bottom: 30px;
-	color: #F2711C;
+	color: #8C1515;
 }
 h5.column {
 	margin-top: 0px;
@@ -26,14 +40,18 @@ h5.column {
 }
 #name {
 	position: absolute;
-	color: #F2711C;
+	color: white;
+	/*color: #8C1515;*/
+}
+#search__bar {
+	width: 65%;
 }
 #logo_div {
-	width: 60px;
-    height: 50px;   
-    margin-left: 10px; 
-    margin-top: 10px;
-    margin-bottom: 10px;
+	width: 300px;
+    height: 30px;   
+    margin-left: 30px; 
+    margin-top: 20px;
+    /*margin-bottom: 10px;*/
     margin-right: 10px;
     overflow: hidden;
     position: relative;
@@ -115,9 +133,9 @@ h5.column {
 	display: inline-block;
 	float: middle;
 }
-.gray_background {
+/*.gray_background {
 	background-color: #F5F5F5;	
-}
+}*/
 .ui.segment {
 	margin: 0px 0px 0px 0px;
 }
@@ -166,8 +184,9 @@ h5.column {
 	text-align: center;
 }
 .footer {
-	background-color: #F2711C;
-	height: 300px;
+	background-color: #8C1515;
+	height: 50px;
+	text-align: center;
 }
 .ui.divider.spaced {
 	margin-top: 80px;

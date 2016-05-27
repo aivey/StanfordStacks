@@ -9,55 +9,70 @@
 
 	<link rel="stylesheet" type="text/css" href="/semantic/semantic.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/home.css">
-	<link rel="stylesheet" type="text/css" href="/css/login.css"/>
      <link rel="stylesheet" type="text/css" href="/semantic/components/button.css"/>
     <link rel="stylesheet" type="text/css" href="/semantic/components/button.min.css"/>
 
-	<title>UrbanSpire</title>
-
-	<script type="text/javascript">
-		var pic1 = 'images/intro/drums.jpg';
-		var pic2 = 'images/intro/dragon.jpg';
-		var pic3 = 'images/intro/fans.jpg';
-		var pic4 = 'images/intro/japan.jpg';
-		var pic5 = 'images/intro/korean-food.jpg';
-		var pic6 = 'images/intro/dolls.jpg';
-		var pic7 = 'images/intro/monks.jpg';
-		var pic8 = 'images/intro/bowls.jpg';
-
-        var picPaths = [pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8];
-        var curPic = -1;
-        //preload the images for smooth animation
-        var imgO = new Array();
-        for(i=0; i < picPaths.length; i++) {
-            imgO[i] = new Image();
-            imgO[i].src = picPaths[i];
-        }
-
-        function swapImage() {
-            curPic = (++curPic > picPaths.length-1)? 0 : curPic;
-            imgCont.src = imgO[curPic].src;
-            setTimeout(swapImage,10000);
-        }
-
-        window.onload=function() {
-            imgCont = document.getElementById('main_banner');
-            swapImage();
-        }
-
-    </script>
+	<title>StanfordStack</title>
 
     <script>
+    	function showMenu() {
+    		console.log("being called");
+    		$('.sidebar').sidebar('toggle');
+    	}
+
 	    $( document ).ready(function() {
 	        $('#profile_dropdown').dropdown({action: 'combo'});
 			$('.ui.accordion').accordion();
+			$('.sidebar').sidebar('show');
+			$('#logo_div').click(showMenu);
 	    });
+
 	</script>
 </head>
 
 <body>
 
+	
+
+	<!-- <div id="sidebar" class="ui left vertical menu sidebar">
+		<div class="item">
+		    <img class="ui mini image" src="/images/logo.jpg">
+		</div>
+		<a class="item">Features</a>
+		<a class="item">Testimonials</a>
+		<a class="item">Sign-in</a>
+	</div>
+	<div class="pusher">
+	</div> -->
+
 	<% include ../partials/menu-bar.ejs %> 
+
+	<div class="ui five column grid" style="margin: 30px 30px;">
+		<% categories.forEach(function(category) { %>
+			<div class="column">
+	    		<div class="ui fluid card" href="/category?type=<%=category._id%>">
+	      			<a class="image" href="/category?type=<%=category._id%>&name=<%=category.title%>">
+	        			<img src="/images/<%=category.image%>">
+	      			</a>
+	      			<div class="content">
+	       				<a class="header" href="/category?type=<%=category._id%>&name=<%=category.title%>"><%=category.title%></a>
+	       				<div class="description">
+				          	<p><%=category.description%></p>
+				        </div>
+	      			</div>
+	      			<div class="extra content">
+					    <i class="star icon"></i>
+					    <%=category.likes%> Starred
+					</div>
+	    		</div>
+	  		</div>
+		<% }); %>
+	</div>
+
+	<% include ../partials/footer.ejs %> 
+
+
+		<!-- 
  		<div class = "banner gray_background"> 
 			<img class = "home_banner" id = "main_banner">
 			<div class="ui basic segment banner_middle">
@@ -74,24 +89,24 @@
 			</div>
 		</div>
 		<div class = "gray_background">
-			<div class = "ui container gray_background">
+			<div class = "ui container gray_background"> -->
 
 			<!-- VISION -->
-			<h3 class = "ui header subtitles"> Vision Statement </h3>
+			<!-- <h3 class = "ui header subtitles"> Vision Statement </h3>
 			<h4 class = "ui header underline"> ________ </h4>
 			<h4 class = "vision_statement"> UrbanSpire is a cultural bridge that offers newcomers the chance to flourish in their new community by teaching what they know and love from their home in a neighbor-to-neighbor context.</h4>
-			<div class="ui divider spaced"></div>
+			<div class="ui divider spaced"></div> -->
 
 			<!-- HOW IT WORKS -->
-			<h3 class = "ui header subtitles"> How it Works </h3>
+			<!-- <h3 class = "ui header subtitles"> How it Works </h3>
 			<h4 class = "ui header underline"> ________ </h4>
 			<h4 class = "working_statement"> We welcome both newcomers and locals to our UrbanSpire community.</h4>
 			<div class = "ui one column center aligned grid">				
 				<button class="left attached active orange ui button" id = "newcomer_button">Newcomer</button>
 				<button class="right attached ui button" id = "local_button">Local</button>
-			</div>
+			</div> -->
 			<!-- NUMBERING -->
-			<div class="ui three column left aligned grid">
+			<!-- <div class="ui three column left aligned grid">
 				<div class="row">
 					<div class="column">
 						<div class="ui circular labels" id = "work_labels">
@@ -109,9 +124,9 @@
 						</div>		
 					</div>
 				</div>
-			</div>
+			</div> -->
 			<!--STEP DESCRIPTIONS-->
-			<div class="ui three column center aligned very relaxed grid">
+			<!-- <div class="ui three column center aligned very relaxed grid">
 			  	<div class="row">
 				    <div class="column">		    	
 						<img class= "large_icon icon_1" src = "images/help_icon.png"></i>
@@ -144,9 +159,6 @@
 			</div>
 			</br>
 			</br>
-		</div>
-	<% include ../partials/footer.ejs %> 
-	<script src="/js/home-view.js"></script>
-	<script src="/js/login-view.js"></script>
+		</div> -->	
 </body>
 </html>

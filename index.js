@@ -1,4 +1,5 @@
 var http = require('http');
+const https = require('https');
 var express = require('express');
 var ejs = require('ejs');
 var app = express();
@@ -11,6 +12,19 @@ var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var MongoStore = require('connect-mongodb');
+var pg = require('pg');
+
+// pg.defaults.ssl = true;
+// pg.connect(process.env.DATABASE_URL, function(err, client) {
+//   if (err) throw err;
+//   console.log('Connected to postgres! Getting schemas...');
+
+//   client
+//     .query('SELECT table_schema,table_name FROM information_schema.tables;')
+//     .on('row', function(row) {
+//       console.log(JSON.stringify(row));
+//     });
+// });
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -46,7 +60,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //app.use(express.cookieDecoder());
 app.use(cookieParser());
 //app.use(session({ secret: 'iloveurbanspire' }));
-app.use(session({ store: new MongoStore({ db: mongoose.connection.db }), secret: 'iloveurbanspire' })); // session secret
+app.use(session({ store: new MongoStore({ db: mongoose.connection.db }), secret: 'ilovestanfordstack' })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session

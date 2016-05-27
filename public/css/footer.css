@@ -3,6 +3,7 @@ body {
 }
 .footer_text {
 	font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+	text-align: center;
 }
 .footer_divider {
 	width: 50%;

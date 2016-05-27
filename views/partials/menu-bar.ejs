@@ -2,6 +2,9 @@
 <script src="/accordion/accordion.js"></script>
 <link rel="stylesheet" type="text/css" href="/dropdown/dropdown.css">
 <link rel="stylesheet" type="text/css" href="/accordion/accordion.css">
+<link rel="stylesheet" type="text/css" href="/semantic/components/button.css"/>
+<link rel="stylesheet" type="text/css" href="/semantic/components/button.min.css"/>
+<link rel="stylesheet" type="text/css" href="/semantic-ui-menu/menu.css"/>
 
 <script>
       //This is the function that closes the pop-up
@@ -45,25 +48,21 @@
         }  
 </script>
 
-<div class="ui top fixed menu">
+<div class="ui top fixed menu" id="menu___bar">
 	<div class = "header">
 		<div id="logo_div">
-			<a href = "home">
-				<img style = "width: 100%; height: 100%" src = "images/logo.jpg">
+			<a class = "ui header" id = "name" href = "home">Stanford Stack</a>
+			<!--<a href = "home">-->
+				<!--<img style = "width: 100%; height: 100%" src = "images/logo.jpg">-->
+			<!--</a>-->
 		</div>
 	</div>
-  	<a class = "ui header" id = "name" href = "home">UrbanSpire</a>
+  	
 
   	<% if (!user) { %>
 		<div class="ui secondary pointing right menu" id = "nav_bar">
 		  	<a id="homeMenu" href = "home" class="item">
 		    	Home
-		  	</a>
-		  	<a id="learnMenu" href = "learn" class="item">
-		    	Learn
-		  	</a>
-		  	<a id="teachMenu" href = "teach" class="item">
-		    	Teach
 		  	</a>
 		  	<a id="loginMenu" class="item">
 		    	Login
@@ -84,7 +83,7 @@
 
 		          <input type="password" name="password" placeholder="Password">
 		        </div>
-		        <button class="ui orange button" type="submit" style="width: 100%;">Log in</button>
+		        <button class="ui red button" type="submit" style="width: 100%;">Log in</button>
 		      </form>
 		    </div>
 		    <div class="extra content">
@@ -101,25 +100,28 @@
 		        <div class="content">
 		          <form class="ui form" action="/signup" method="post" >
 		            <div class="field">
-		              <input type="text" name="firstname" placeholder="First Name">
+		              <input type="text" name="username" placeholder="Username" required>
 		            </div>
 		            <div class="field">
-		              <input type="text" name="lastname" placeholder="Last Name">
-		            </div>
-		              <div class="field">
-		                <input type="text" name="phone" placeholder="(xxx)-xxx-xxxx">
-		              </div>
-		            <div class="field">
-		              <input type="text" name="email" placeholder="Email">
+		              <input type="text" name="email" placeholder="Email" required>
 		            </div>
 		            <div class="field">
-		              <textarea rows="4" name="description" placeholder="Tell us a bit about yourself here!"></textarea>
-		            </div>
+		            	<select class="ui search selection fluid dropdown" id="year_dropdown" required>
+  							<option value="">Select Year*</option>
+						    <option value="Freshman">Freshman</option>
+						    <option value="Sophomore">Sophomore</option>
+						    <option value="Junior">Junior</option>
+						    <option value="Senior">Senior</option>
+						    <option value="Fifth Year">Fifth Year</option>
+						    <option value="Coterm">Coterm</option>
+						    <option value="Masters">Masters</option>
+						    <option value="Graduate">Graduate</option>
+						</select>
+					</div>
 		            <div class="field">
-		  
-		              <input type="text" name="password" placeholder="Password">
+		              <input type="text" name="password" placeholder="Password" required>
 		            </div>
-		            <button class="ui orange button" type="submit_signup" style="width: 100%;">Sign up</button>
+		            <button class="ui red button" type="submit_signup" style="width: 100%;">Sign up</button>
 		          </form>
 		        </div>
 		        
@@ -131,12 +133,6 @@
 		  	<a id="homeMenu" href = "home" class="item">
 		    	Home
 		  	</a>
-		  	<a id="learnMenu" href = "learn" class="item">
-		    	Learn
-		  	</a>
-		  	<a id="teachMenu" href = "teach" class="item">
-		    	Teach
-		  	</a>
 		</div>
 		<div class = "profile_divider">
 		    <div class="ui inline floating dropdown" id = "profile_dropdown">
@@ -144,16 +140,11 @@
 			    <div class="text">
 					<img class="ui circular massive image" id = "profile_icon" src=<%= user.image %>>
 			    </div>
-			    <i class="dropdown icon orange"></i>
+			    <i class="dropdown icon red"></i>
 			    <div class="menu">
-			      	<a href = "my_classes">
+			      	<a href = "my_favorites">
 			      		<div class="item">
 			       			My Classes
-			      		</div>
-			      	</a>
-			      	<a href = "my_teachings">
-			      		<div class="item">
-			        		My Teachings
 			      		</div>
 			      	</a>
 			      	<a href = "profile">
@@ -188,6 +179,18 @@
   cursor:pointer;
   }
   .msgbox {
+  width:30%;
+  height:30%;
+  position:fixed;
+  top:20%;
+  left:15%;
+  border-radius:20px;
+  padding:10px;
+  z-index:101;
+  display:none;
+  margin-left: 20%;
+  }
+  .linkbox {
   width:30%;
   height:30%;
   position:fixed;
