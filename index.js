@@ -39,6 +39,7 @@ app.engine('.html', ejs.renderFile);
 var uristring = 
   process.env.MONGOLAB_URI || 
   process.env.MONGOHQ_URL || 
+  process.env.MONGODB_URI || 
   'mongodb://localhost/HelloMongoose';
 
 // Makes connection asynchronously.  Mongoose will queue up database
