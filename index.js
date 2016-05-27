@@ -51,6 +51,8 @@ mongoose.connect(uristring, function(err, res) {
   }
 });
 
+//postgres://jxqknnpfawagnc:M9qZK2LSIibfIp55DPMKbF-lQL@ec2-54-235-65-221.compute-1.amazonaws.com:5432/dcr0ntvkqrstm3
+
 
 require('./passport')(passport);
 app.use(bodyParser.json());
